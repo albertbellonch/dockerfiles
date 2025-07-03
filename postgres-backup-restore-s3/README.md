@@ -1,20 +1,20 @@
-# postgres-backup-s3
+# postgres-backup-restore-s3
 
 Backup PostgresSQL to S3 (supports periodic backups)
 
-Forked from https://github.com/schickling/dockerfiles/blob/master/postgres-backup-s3 in order to have pg_dump 17.x.
+Forked from https://github.com/schickling/dockerfiles/blob/master/postgres-backup-s3 and https://github.com/schickling/dockerfiles/blob/master/postgres-restore-s3 in order to have pg_dump 17.x, and combined since it makes more sense for me.
 
 ## Publish
 
 ```sh
-docker build -t abellonch/postgres-backup-s3 --platform linux/amd64 --push .
+docker build -t abellonch/postgres-backup-restore-s3 --platform linux/amd64 --push .
 ```
 
 ## Usage
 
 Docker:
 ```sh
-$ docker run -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost albert.bellonch/postgres-backup-s3
+$ docker run -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost albert.bellonch/postgres-backup-restore-s3
 ```
 
 Docker Compose:
@@ -26,7 +26,7 @@ postgres:
     POSTGRES_PASSWORD: password
 
 pgbackups3:
-  image: albert.bellonch/postgres-backup-s3
+  image: abellonch/postgres-backup-restore-s3
   depends_on:
     - postgres
   links:

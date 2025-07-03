@@ -104,7 +104,8 @@ else
     fi
 
     echo "Creating dump of ${DB} database from ${POSTGRES_HOST}..."
-    pg_dump $POSTGRES_HOST_OPTS $DB | gzip > $SRC_FILE
+    # -c option ensures that the database is dropped and recreated when restoring
+    pg_dump $POSTGRES_HOST_OPTS -c $DB | gzip > $SRC_FILE
 
     if [ -n "${ENCRYPTION_PASSWORD}" ]; then
       echo "Encrypting ${SRC_FILE}"
