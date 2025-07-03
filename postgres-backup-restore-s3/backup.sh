@@ -71,7 +71,7 @@ if [ "${POSTGRES_BACKUP_ALL}" == "true" ]; then
   fi
 
   echo "Creating dump of all databases from ${POSTGRES_HOST}..."
-  pg_dumpall -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER | gzip > $SRC_FILE
+  pg_dumpall -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -c | gzip > $SRC_FILE
 
   if [ -n "${ENCRYPTION_PASSWORD}" ]; then
     echo "Encrypting ${SRC_FILE}"
