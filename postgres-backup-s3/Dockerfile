@@ -18,6 +18,8 @@ ENV SCHEDULE=''
 ADD run.sh run.sh
 ADD backup.sh backup.sh
 RUN chmod +x /backup.sh
+ADD restore.sh restore.sh
+RUN chmod +x /restore.sh
 
 ENTRYPOINT []
 CMD ["sh", "run.sh"]
