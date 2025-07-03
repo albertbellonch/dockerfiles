@@ -63,7 +63,7 @@ LATEST_BACKUP=$(aws $AWS_ARGS s3 ls s3://$S3_BUCKET/ | sort | tail -n 1 | awk '{
 
 echo "Fetching ${LATEST_BACKUP} from S3"
 
-aws s3 cp s3://$S3_BUCKET/$S3_PREFIX/${LATEST_BACKUP} dump.sql.gz
+aws $AWS_ARGS s3 cp s3://$S3_BUCKET/$S3_PREFIX/${LATEST_BACKUP} dump.sql.gz
 gzip -d dump.sql.gz
 
 if [ "${DROP_PUBLIC}" == "yes" ]; then
