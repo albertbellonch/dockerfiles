@@ -73,7 +73,15 @@ fi
 
 echo "Restoring ${LATEST_BACKUP}"
 
-psql $POSTGRES_HOST_OPTS -d $POSTGRES_DATABASE -f dump.sql
+# Drop all connections to the database first
+psql $POSTGRES_HOST_OPTS -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${POSTGRES_DATABASE}' AND pid <> pg_backend_pid();"
+
+# Drop and recreate the database
+psql $POSTGRES_HOST_OPTS -d postgres -c "DROP DATABASE IF EXISTS \"${POSTGRES_DATABASE}\";"
+psql $POSTGRES_HOST_OPTS -d postgres -c "CREATE DATABASE \"${POSTGRES_DATABASE}\";"
+
+# Now restore into the fresh database
+psql $POSTGRES_HOST_OPTS -d $POSTGRES_DATABASE < dump.sql
 
 echo "Restore complete"
 
