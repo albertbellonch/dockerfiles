@@ -73,8 +73,7 @@ fi
 
 echo "Restoring ${LATEST_BACKUP}"
 
-# Restore the database
-psql pg_restore --create --clean -d $POSTGRES_DATABASE < dump.sql
+psql $POSTGRES_HOST_OPTS -d $POSTGRES_DATABASE -f dump.sql
 
 echo "Restore complete"
 
