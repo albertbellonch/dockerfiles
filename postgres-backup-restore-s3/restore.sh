@@ -74,7 +74,7 @@ fi
 echo "Restoring ${LATEST_BACKUP}"
 
 # Restore the database
-postgres pg_restore --create --clean -d $POSTGRES_DATABASE < dump.sql
+psql pg_restore --create --clean -d $POSTGRES_DATABASE < dump.sql
 
 echo "Restore complete"
 
