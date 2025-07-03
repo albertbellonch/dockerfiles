@@ -4,6 +4,12 @@ Backup PostgresSQL to S3 (supports periodic backups)
 
 Forked from https://github.com/schickling/dockerfiles/blob/master/postgres-backup-s3 in order to have pg_dump 17.x.
 
+## Publish
+
+```sh
+docker build -t abellonch/postgres-backup-s3 --platform linux/amd64 --push .
+```
+
 ## Usage
 
 Docker:
