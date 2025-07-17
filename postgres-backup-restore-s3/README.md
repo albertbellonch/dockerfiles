@@ -10,6 +10,14 @@ Forked from https://github.com/schickling/dockerfiles/blob/master/postgres-backu
 docker build -t abellonch/postgres-backup-restore-s3 --platform linux/amd64 --push .
 ```
 
+If there is an issue regarding authorization like:
+`push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed`
+
+Then ensure you are logged in:
+```sh
+docker login
+```
+
 ## Usage
 
 Docker:
