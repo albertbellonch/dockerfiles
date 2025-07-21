@@ -10,6 +10,6 @@ if [ -z "${SCHEDULE}" ]; then
   sh backup.sh
 else
   export -p > /env.sh
-  echo "${SCHEDULE} /bin/sh -c '. /env.sh; . /backup.sh'" > /etc/crontabs/root
+  echo "${SCHEDULE} root /bin/sh -c '. /env.sh; /bin/sh /backup.sh'" > /etc/crontabs/root
   exec go-crond /etc/crontabs/root
 fi
